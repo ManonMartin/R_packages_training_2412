@@ -1,0 +1,25 @@
+#' Advise movies based on another movie
+#'
+#' `advise_movie` takes as input a movie from the movie database and gives as output a number
+#' of movies that are similar.
+#'
+#' @param similar_to character, movie title from the database.
+#' @param how_many integer, how many movies to advise.
+#' @param draw_scores if `TRUE`, draws a barplot with the similarity scores.
+#' @param ... additional arguments (for now, only `weights`).
+#'
+#' @returns
+#' A `list` with the following elements: `movie_title`: advised movie title(s),
+#' `plot`: plot(s) of advised movie title(s),
+#' `movie_ids`: line number in the `movies_DB` database of the advised movie(s),
+#' `scores`: similarity scores of the advised movie(s)
+#'
+#' @examples
+#' suggestions <- advise_movie(similar_to = "Interstellar", how_many = 3,
+#' draw_scores = TRUE, weights = c("genre"=1, "popularity"=1, "rating"=1,
+#' "production company"=1))
+#'
+#' @import graphics
+#' @importFrom purrr map_dbl
+#'
+#' @export
