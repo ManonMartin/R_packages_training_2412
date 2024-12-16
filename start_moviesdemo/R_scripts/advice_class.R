@@ -1,14 +1,23 @@
-#' An S4 class to represent a movie advice
+#' @title An S4 class to represent a movie advice
 #'
-#' @slot movie_title movie_title of the advised movie
-#' @slot plot plot of the advised movie
-#' @slot keywords keywords of the advised movie
+#' @name advice
 #'
+#' @rdname advice-class
+#'
+#' @param movie_title movie_title
+#' @param plot plot
+#' @param keywords keywords
+#' @param object an object of class advice
+#' @param value value to assign to the movie title
+#' @param movie_title movie title
+#'
+#' @aliases advice advice-class class:advice
+#' @aliases advice-method movie_title<- advice-method show,advice-method
+#' @seealso \code{\link{advice}}
 #' @import methods
+#' @export advice
 
-
-# define the S4 class
-advice <- methods::setClass("advice",
+methods::setClass("advice", # define the S4 class
          slots = c( # describes the names and classes of the slots
            movie_title = "character",
            plot = "character",
@@ -23,6 +32,8 @@ advice <- methods::setClass("advice",
 
 
 # define a method for an existing S4 generic (show)
+#' @describeIn advice-class show the advice
+#' @export show
 methods::setMethod("show", "advice", function(object) {
   nn <- length(object@movie_title)
   titles <- paste(object@movie_title, collapse = ", ")
@@ -37,34 +48,40 @@ methods::setMethod("show", "advice", function(object) {
       sep = "")
 })
 
-# helper (user friendly) to create a new advice
+
+methods::setGeneric("movie_title", function(object) standardGeneric("movie_title")) # getter
+#' @describeIn advice-class movie_title of the advice
+methods::setMethod("movie_title", "advice", function(object) object@movie_title)
+
+
+methods::setGeneric("movie_title<-", function(object, value) standardGeneric("movie_title<-"))
+#' @describeIn advice-class movie_title of the advice
+methods::setMethod("movie_title<-", "advice", function(object, value) {
+  object@movie_title <- value
+  methods::validObject(object)
+  object
+})
+
+# movie_title(new_adv)
+# movie_title(new_adv) <- "title2"
+
+#' @rdname advice-class
+#'
+#' @examples
+#' new_adv <- advice("title1")
+#' new_adv
+#' # advice(32) # not working (internal validation)
+#' @returns An \code{\link{advice-class}}
+#' @export
 advice <- function(movie_title,
                    plot = NA_character_,
                    keywords = NA_character_) {
 
   methods::new("advice", movie_title = movie_title,
-      plot = plot,
-      keywords = keywords)
+               plot = plot,
+               keywords = keywords)
 }
 
-# new_adv <- advice("test")
-# new_adv
 
-# advice(32) # not working (internal validation)
-
-# getter
-methods::setGeneric("movie_title", function(x) standardGeneric("movie_title"))
-methods::setMethod("movie_title", "advice", function(x) x@movie_title)
-
-# setter
-methods::setGeneric("movie_title<-", function(x, value) standardGeneric("movie_title<-"))
-methods::setMethod("movie_title<-", "advice", function(x, value) {
-  x@movie_title <- value
-  methods::validObject(x)
-  x
-})
-
-# movie_title(new_adv)
-# movie_title(new_adv) <- "test2"
 
 

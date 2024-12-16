@@ -7,6 +7,3 @@
 sent_results/*
 processed/*
 data/*
-results/kraken2/pluspfp/filtered_fastq/*
-.fastq
-2409_ELIM_SaulPeup_Process_VC/*
