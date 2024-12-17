@@ -1,4 +1,4 @@
-#' moviesdemo: A demo R package.
+#' @keywords internal
 #'
 #' A demo package for the SMCS course on creating and publishing R packages,
 #' based on metadata of 4800 movies from The Movie Database.
@@ -10,5 +10,4 @@
 #' }
 #' @section Database:
 #' The database used is the TMDb movies Database (see \code{\link{movies_DB}})
-#'
 "_PACKAGE"
